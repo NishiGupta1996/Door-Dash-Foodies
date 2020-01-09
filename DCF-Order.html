@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<!--==================================================================
+//
+// Web site:   Food Delivery System Web site (Door Crash Foodies)
+// Web page:   Order Page
+// Description:
+//      This page contain the form to order for the food. It
+// take the order from the customer.
+//
+//=================================================================-->
+
+<head>
+  
+	<title>Door Crash Foodies Order, v4</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="author" content="Nishi Gupta"/>
+    <meta name="description" content="Door Crash Foodies"/>
+    <meta http-equiv="Expires" content="-1">
+	
+	<!-- External CSS link -->
+	<link rel="stylesheet" type="text/css" 
+    href="Door Crash Foodies-ExternalStyles.css">
+	
+	<script 
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+  </script>  
+	
+	<script type="text/javascript">
+	"use strict";
+	var foodItemsArray=[];
+	
+	 //-----setFoodItems---------
+    function setFoodItems()
+    {
+      // Declare variables
+		var opt;
+		var txt;
+		var selection;
+
+      // Test which button checked
+		if (T.checked)
+			selection = "Taste of India Tandoori";
+		else if (Z.checked)
+			selection = "ZamZam";
+		else if (A.checked)
+			selection = "Aladdin Sweets & Cafe";
+		else if (P.checked)
+			selection = "Phulkari Punjabi Kitchen";
+
+      // Loop to remove any current food items and costs
+		while (cmbFoodItems.hasChildNodes())
+			cmbFoodItems.removeChild(cmbFoodItems.firstChild);
+			clearCosts();
+      
+      // Add default food item
+		opt = document.createElement("option");
+		txt = document.createTextNode("Food item");
+		opt.appendChild(txt);                                
+		cmbFoodItems.appendChild(opt);
+
+      // Loop to add food items to combo boxs
+	  for(var i=0; i<foodItemsArray.length;i++)
+		{
+        // Test if food item from restaurant
+			if (selection == foodItemsArray[i][1])
+			{
+				opt = document.createElement("option");
+				opt.value = foodItemsArray[i][0] + "-" + foodItemsArray[i][2];
+				txt = document.createTextNode(foodItemsArray[i][2] + " $" + foodItemsArray[i][3]);
+				opt.appendChild(txt);                                
+				cmbFoodItems.appendChild(opt);
+			}
+		} 
+      
+    }
+  
+
+    
+     <!------ getFoodItems(Fetch file from server)---------------->
+    function getFoodItems()
+			{
+		
+				// Declare variables
+				var xhttp;
+				
+				// Try to list cities
+				try
+				{
+					xhttp = new XMLHttpRequest();
+					xhttp.onreadystatechange = function() 
+					{
+						if (this.readyState == 4 && this.status == 200)
+						{
+								foodItemsArray = $.parseJSON(this.responseText);
+						} 
+					};
+					xhttp.open("GET", "DoorCrash-DatabaseInterface.php?request=list", false);
+					xhttp.send();
+				  }
+				  catch (ex)
+				  {
+					window.alert("Error" + "\nName: " + ex.name + 
+					  "\nMessage: " + ex.message + "\nStack: " + ex.stack);
+				  }	
+				console.log("Food Items data");
+				for(var i=0; i< foodItemsArray.length; i++)
+				{
+					console.log(foodItemsArray[i][1]+ ", " +foodItemsArray[i][2]+", " +foodItemsArray[i][3]+ ", " +foodItemsArray[i][4]+ ", " +foodItemsArray[i][5]);
+				}
+	  
+    } 
+	
+ 	<!-- // selectFoodItem
+    function selectFoodItem()
+    {
+      var s;
+      var i;
+      clearCosts();
+		if (cmbFoodItems.selectedIndex != 0)
+		{
+			s = cmbFoodItems.value;
+			i = s.indexOf("$") + 1;
+			txtItemCost.value = s.substring(i);
+		}
+    }
+	<!----------To update subtotal , tax, total of the item--------->
+    function updateCosts() {
+		    //get quantity
+            var quantity = document.getElementById("txtItemQuantity").value; 
+			
+			//resturant item cost
+			var rItem = document.getElementById("cmbFoodItems").value;       
+            var itemvalue = rItem.split('$')[1];                              
+			//subtotal of the items
+			var costsubtotal= quantity * itemvalue;
+			txtSubtotal.value = (quantity * itemvalue).toFixed(2);            
+			
+			// tax= ordersubtotal* 0.06
+			var costtax =(costsubtotal * 0.06);
+			txtTax.value = (costsubtotal * 0.06).toFixed(2);
+			
+			//total cost = ordersubtotal + tax
+			txtTotal.value = (costsubtotal + costtax).toFixed(2);
+			                       
+        }
+    // clearCosts
+    function clearCosts()
+    {
+		txtItemQuantity.value = "";
+		txtItemCost.value = "";
+		txtSubtotal.value = "";
+		txtTax.value = "";
+		txtTotal.value = "";
+    }
+	
+	function updateCounts()
+			{
+				
+				// Declare variables
+				var xhttp;
+				
+				var menudata = document.getElementById("cmbFoodItems").value;
+				var ID = menudata.substr(0, menudata.indexOf('-'));
+				var itemQuantity = document.getElementById("txtItemQuantity").value;
+				// Test if city blank
+				if (ID.length == 0)
+					alert("Error: ID cannot be blank.");
+				else if (ID.itemQuantity == 0)
+					alert("Error: ID cannot be blank.");
+					
+				else
+				{
+			
+					// Try to update city
+					try
+					{
+						xhttp = new XMLHttpRequest();
+						xhttp.onreadystatechange = function() 
+						{
+							if (this.readyState == 4 && this.status == 200)
+						{
+							window.alert(this.responseText);
+						} 
+					};
+					xhttp.open("GET","DoorCrash-DatabaseInterface.php?request=update&id=" + ID + "&quantity=" + itemQuantity, false);
+					xhttp.send();
+					}
+					catch (ex)
+					{
+						window.alert("Error" + "\nName: " + ex.name + 
+						"\nMessage: " + ex.message + "\nStack: " + ex.stack);
+					}
+			  
+				}
+				
+			}		
+</script>
+</head>
+	
+<body onload="getFoodItems()">
+	<!--header -->
+	<div style="height:200px; background-image:linear-gradient(lightblue, white)"><br>
+	<h1>Door Crash Foodies<sub style="font-family:cursive; font-size:25px">Restaurants you love, Delivered to you!</sub></h1>
+	</div>
+	<hr>
+  
+	<!-- Menu-->
+    <h2>
+	<a href="DCF-Main.html">Main</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="DCF-Restaurant.html">About Restaurant</a>&nbsp;&nbsp;&nbsp;
+	<a href="DCF-Order.html">Order Now</a>
+	</h2>
+	<hr>
+	
+    <!-- comment -->
+	<h2>START YOUR ORDER HERE</h2>
+	
+	<main>
+	<!---Form------->
+	<form action="OrderConfirmation.php" method="post" onsubmit="updateCounts()">
+    
+    <label>First Name:</label>
+	<input type="text" name="FirstName" required>
+    <br><br>
+	
+	 <label>Last Name:</label>
+	<input type="text" name="LastName" value="" required>
+    <br><br>
+    
+    <label>Address: </label>
+    <input type="text" name="Address" value="" required>
+    <br><br>
+    
+	<label>Telephone: </label>
+    <input type="tel" name="inpTelephone" required>
+    <br><br>
+	
+	<legend>Restaurant:</legend>
+	<fieldset class="fieldsetStyle">
+		<input type="radio" id="T" name="rbTimeSlot" value="Taste of India Tandoori" class="radioButtonStyle" onclick="setFoodItems()"> Taste of India Tandoori<br>
+		<input type="radio" id="Z" name="rbTimeSlot" value="ZamZam Resturant" class="radioButtonStyle" onclick="setFoodItems()"> ZamZam Resturant<br>
+		<input type="radio" id="A" name="rbTimeSlot" value="Aladdin Sweets & Cafe" class="radioButtonStyle" onclick="setFoodItems()"> Aladdin Sweets & Cafe<br>
+		<input type="radio" id="P" name="rbTimeSlot" value="Phulkari Punjabi Kitchen" class="radioButtonStyle" onclick="setFoodItems()"> Phulkari Punjabi Kitchen<br>
+	</fieldset>
+	<br>
+	<hr>
+	
+	<label>Restaurants FoodItems:</label>
+	<select id="cmbFoodItems" name="FoodItems" onchange="selectFoodItem()">
+	<option>Food Items</option>
+	</select> 
+  	<br><br>
+	
+	<label>Item quantity: </label>
+    <input type="text" name="item" id="txtItemQuantity" onchange="updateCosts()">
+    <br><br>
+	
+	<label>Item Cost ($): </label>
+	<input type="text" name="cost" id="txtItemCost" readonly>
+	<br><br>
+	<label>Order Subtotal ($): </label>
+	<input type="text" id="txtSubtotal"  name="ordersubtotal" readonly >
+	<br><br>
+	<label>Order Tax ($): </label>
+	<input type="text" name="ordertax" id="txtTax" readonly>
+	<br><br>
+	<label>Total ($): </label>
+	<input type="text" name="total" id="txtTotal" readonly>
+	<br><br>
+	
+	 <!-- Buttons -->
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+	
+	</form>	
+	</main>
+	<hr>
+ 
+	<!--Footer-->
+	<footer>
+	<h4>
+    <i><font color="white">Door Crash Foodies! Enjoy your delicious food! </i>&nbsp;&nbsp;<br>
+    <a class="emailStyle" href="mailto:somebody@doorcrashfoodies.com">E-mail</a>&nbsp;&nbsp;
+     313-717-8034&nbsp;&nbsp;<br>
+    Copyright&nbsp;&copy;&nbsp;2019 Door Crash Foodies All rights reserved.
+	</font>
+	</h4>
+	</footer>
+	<hr>
+	
+</body>
+</html>
