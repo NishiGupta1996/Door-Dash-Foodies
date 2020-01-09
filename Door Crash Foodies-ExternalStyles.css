@@ -1,0 +1,212 @@
+/*==========================================================
+
+ Title: Door Crash Foodies-CSS External File
+ Description:
+   This CSS page contains CSS external styles for the web 
+ site. 
+==========================================================*/
+
+/*==========================================================
+ Body style
+==========================================================*/
+body
+{
+  background-color:lightgray;
+  font-family:verdana;
+  font-size:30px; 
+  padding:10px;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:40px 40px;
+}
+
+/*==========================================================
+ Heading styles
+==========================================================*/
+h1
+{
+  font-family:Lobster;
+  font-size:55pt;
+  text-align:center;
+  text-shadow: 1px 1px red;
+}
+h2
+{
+  background-color:#334431;
+  color:white;
+  font-size:40px;
+  padding:18px;
+  text-align:center;
+}
+h3
+{
+  background-color:#334431;
+  color:white;
+  font-size:25px;
+  padding:20px;
+  text-align:center;
+}
+h4
+{
+  background-color:#334431;
+  color:white;
+  font-size:30px;
+  text-align:center;
+  font-family:Lobster;
+  padding:20px;
+}
+/*==========================================================
+Paragraph, div, li style
+==========================================================*/
+p, div, li
+{
+	font-family:Yatra One;
+    font-size:30px;
+    font-style:italic;
+}
+
+/*==========================================================
+ ul style
+==========================================================*/
+ul
+{
+	font-family:normal;
+    font-size:25px;
+}
+
+/*==========================================================
+ Input and select styles
+==========================================================*/
+input, select
+{
+  background-color:white;
+  font-size:25px;
+  font-weight:bold;
+  padding:10px;
+  width:400px;
+}
+/*==========================================================
+ Anchor style
+==========================================================*/
+a
+{
+  color:white;
+  padding:20px;
+}
+/*==========================================================
+ Label style
+==========================================================*/
+label
+{
+  display:inline-block;
+  font-size:30px;
+  width:500px;
+}
+
+/*==========================================================
+ th style
+==========================================================*/
+th
+{
+  background-color:#e05038;
+  color:white;
+}
+/*==========================================================
+ Pseudo classes
+==========================================================*/
+a:hover
+{
+  background-color:#e05038;
+  color:white;
+}
+
+input.formButtonStyle:hover
+{
+  background-color:#e05038;
+}
+
+input:focus
+{
+  background-color:#e05038;
+  color:white;
+}
+
+/*==========================================================
+ Class styles
+==========================================================*/
+.emailStyle
+{
+  color:white;
+}
+
+.formButtonStyle
+{
+  background-color:#334431;
+  color:white;
+  text-align: center;
+  font-size:30px;
+  margin:20px;
+  padding:20px;
+  width:300px;
+}
+.fieldsetStyle
+{
+  background-color:white;
+  padding-left:40px;
+  width:50%;
+
+  
+}
+
+/*==========================================================
+ table style
+==========================================================*/
+
+table 
+{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td
+{
+   border: 1px solid #dddddd;
+   text-align: left;
+   padding-left:10px;
+   padding-right:10px;
+   padding-top:10px;
+   vertical-align:top;
+
+  
+}
+
+tr:nth-child(even) 
+{
+    background-color: #dddddd;
+}
+/*==========================================================
+ ID styles
+==========================================================*/
+ 
+#headerFlexible
+{
+  background-color:#c43235;
+  color:white;
+  clear:both;
+  color:white;
+  margin:10px;
+  padding:30px;
+  width:100%;
+}
+
+#footerFlexible
+{
+  background-color:#c43235;
+  color:white;
+  clear:both;
+  color:white;
+  margin:4px;
+  padding:10px;
+  width:100%;
+}
