@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html>
+
+<!--==================================================================
+//
+// Web site:   Food Delivery System Web site (Door Crash Foodies)
+// Web page:   Restaurant Page
+// Description:
+//     Resturant page shows the information about their own food, 
+// about their menu which you can order.
+// 
+//=================================================================-->
+
+<head>
+  
+	<title>Door Crash Foodies Restaurant, v4</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="author" content="Nishi Gupta"/>
+    <meta name="description" content="Door Crash Foodies"/>
+    <meta http-equiv="Expires" content="-1">
+	
+	<!--External CSS link-->
+	<link rel="stylesheet" type="text/css" 
+     href="Door Crash Foodies-ExternalStyles.css">
+	
+	<!-- jQuery link (needed for DataTables) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
+  
+	<!-- DataTables CSS and script links -->
+	<link rel="stylesheet" type="text/css" 
+    href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
+	</script>
+	
+</head>
+
+<body>
+
+    <!--header -->
+	<div style="height:200px; background-image:linear-gradient(lightblue, white)"><br>
+	<h1>Door Crash Foodies<sub style="font-family:cursive; font-size:25px">Restaurants you love, Delivered to you!</sub></h1>
+	</div>
+	<hr>  
+	
+	
+    <!-- Restaurant table -->
+	<table id="tableEvents" class="display">
+    <thead>
+      <tr>
+	  	<th>Food Item ID</th>
+		<th>Restaurant</th>
+		<th>Food Items & Prices</th>
+		<th>Price</th>
+		<th>Quantity</th>      
+		<th>Orderes</th>
+	  </tr>
+    </thead>
+
+    
+  </table>
+  
+  <!-- DataTables script -->
+  <script type="text/javascript">
+					//==================================================
+					// Declaration of a global variable
+					//==================================================
+					var restaurantItems = new Array();
+					
+					$(document).ready(function (){
+						$.ajax({
+							type: "Get",
+							url: 'DoorCrash-DatabaseInterface.php?request=list',
+							async: false,
+							success: function (response) {
+								restaurantItems = $.parseJSON(response);
+								FillData(restaurantItems);
+							}
+						})
+					});
+
+				var FillData = function (restaurantItems) {
+					$("#tableEvents").DataTable({
+						data: restaurantItems
+
+					});
+				}
+				</script>
+	<h3 style="color:rgb(255,0,0)">
+		CALL IN FOR DELIVERY AND PICK UP<br>
+	</h3>
+	
+<!--Footer-->
+<footer>
+	<h4 style="border:2px solid; border-radius:20px"> 
+    <p><i><font color="white">Taste of India Tandoori, 4500 East Carpenter Freeway, Detroit, MI 48201</i>&nbsp;&nbsp;
+    <a class="emailStyle" href="mailto:Tandoori@Tasteofindia.com">E-mail</a>&nbsp; 469-222-5234&nbsp;&nbsp;&nbsp;&nbsp;  Copyright&nbsp;&copy;&nbsp;2019
+	</font><br>
+	<i><font color="white">ZamZam Resturant , 34 Lindenwood drive , Ann Harbor , MI75062</i>&nbsp;&nbsp;
+    <a class="emailStyle" href="mailto:zamzam@gamil.com">E-mail</a>&nbsp; 716-897-7300&nbsp;&nbsp;&nbsp;&nbsp;  Copyright&nbsp;&copy;&nbsp;2019
+	</font><br>
+	<i><font color="white">Aladdin Sweets & Cafe, 5050 Cass Ave , Farmington hills, MI 45201</i>&nbsp;&nbsp;
+    <a class="emailStyle" href="mailto:somebody@Sweetscafe.com">E-mail</a>&nbsp; 454-262-5267&nbsp;&nbsp;&nbsp;&nbsp;  Copyright&nbsp;&copy;&nbsp;2019
+	</font><br>
+	<i><font color="white">Phulkari Punjabi Kitchen, 27707 Dequindre Rd , Dearborn , MI 48071</i>&nbsp;&nbsp;
+    <a class="emailStyle" href="mailto:phulkarikitchen@gmail.com">E-mail</a>&nbsp; 248-541-3562&nbsp;&nbsp;&nbsp;&nbsp;  Copyright&nbsp;&copy;&nbsp;2019
+	</font>
+	</p>
+  </h4>			
+</footer>
+</body>
+</html>
