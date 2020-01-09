@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<!--==================================================================
+//
+// Web site:   Food Delivery System Web site (Door Dash Foodies)
+// Web page:   Main Page
+// Course:     CSC 5750
+// Homework:   1
+// Author:     Nishi Gupta
+// Date:       19 September 2019
+// Description:
+//       Door Dash Foodies is a web site contains information 
+// about the resturant which delivers the food. Their are 3 pages -
+// Main page contains general information about the website/resturants. 
+// Resturant page shows the information about their own food. 
+// Order Page take the order from the customer.
+//
+//=================================================================-->
+
+<head>
+  
+	<title>Door Crash Foodies Main Page, v4</title>
+	<meta charset="UTF-8">
+    <meta name="author" content="Nishi Gupta"/>
+    <meta name="description" content="Door Crash Foodies"/>
+    <meta http-equiv="Expires" content="-1">
+	<link rel="stylesheet" type="text/css" 
+    href="Door Crash Foodies-ExternalStyles.css">
+	
+	 <!-- Leaflet CSS and script links -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin=""/>  
+  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin="">
+  </script>
+	
+	<!-- Leaflet CSS and script links -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    integrity="pk.eyJ1IjoibmlzaGk0NTYiLCJhIjoiY2swaDZlNGRmMDB3aTNjczd4ajVqZmN1eiJ9.AmTJnN36LFzt3hRYFMrO2Q=="
+    crossorigin=""/>  
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="pk.eyJ1IjoibmlzaGk0NTYiLCJhIjoiY2swaDZlNGRmMDB3aTNjczd4ajVqZmN1eiJ9.AmTJnN36LFzt3hRYFMrO2Q=="
+    crossorigin="">
+	</script>
+	
+	
+	
+	
+</head>
+ 
+<body>
+
+	<!--header -->
+	
+	<div id="headerFlexible" style="height:200px; background-image:linear-gradient(lightblue, white)"><br>
+		<h1>Door Crash Foodies<sub style="font-family:cursive; font-size:25px">Restaurants you love, Delivered to you!</sub></h1>
+	</div>
+	<hr>
+	
+	<!-- Menu / heading to another page-->
+	<div class = "menu">
+    <h2>
+		<a href="DCF-Main.html">Main</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="DCF-Restaurant.html">About Restaurant</a>&nbsp;&nbsp;&nbsp;
+		<a href="DCF-Order.html">Order Now</a>
+	</h2>
+	</div>
+	<hr>
+	<!-- Main Page Starts here-->
+	<div>
+         <img src="freedelivery.jpg" width="100%" alt="Klematis">        
+    </div>
+		
+    <!-- Main Page Table-->
+    <table style=" width:100%">
+  
+    <!-- Column specs -->
+    <colgroup>
+      <col width="50%" >
+      <col width="50%" >
+    </colgroup>
+    
+    <!-- Rows and columns -->
+    <tbody>
+      <tr>
+	    <!--Contact Information including address and phone number-->
+		  <div id="sidePanelFlexible">
+        <td>
+            <h3>Restaurants near you, delivered fast?</h3>
+             
+            Door Crash Foodies is simply the easiest way to order food for delivery or 
+			takeout. Whatever you're in the mood for, wherever you're in the mood for it,
+			you've got it.Just simple neighborhood food delivery.			
+			<br>
+			<b>Address: 5050, Woodward Ave, Detroit, MI 48201<br>
+				Hours: 10AM - 10PM<br>
+				Order: doorcrashfoodies.com<br>
+				Phone: (734) 892-2548</b>
+                    
+        </td>
+		
+		
+		<!--Image describes Delivery Modes-->
+        <td>
+		 <div>
+			<center>
+              <img src="Scooter.jpg" width="450" height="300" alt="Klematis"> <br>
+              <label>Mode Of Transportation <br><b><i>Scooter, Bike, Car...!</i></b></label>			  
+            </center>
+		 </div>
+        </td>
+      </tr>
+	  		
+	  <tr>
+	    <!-- Location shown on map image -->
+		<td>		  
+             <div id="mapLeaflet" style="width:100%; height:400px">
+			  </div>
+			 
+        
+          
+          <!-- Leaflet map script -->
+          <script type="text/javascript">
+            var mymap = L.map('mapLeaflet').setView([42.331429,  -83.045753], 12);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
+            {
+              id: 'mapbox.streets',
+              accessToken: 'sk.eyJ1IjoibmlzaGk0NTYiLCJhIjoiY2swbmE3d2hsMWZraDNlcW9qcmltZWNmcyJ9.LfstngrLCcNqJhwxcwqNTA'
+            }).addTo(mymap);
+            var marker = L.marker([42.331429,  -83.045753]).addTo(mymap);            
+          </script> 
+		   
+ 	   </td>
+
+	   <!--Name of the Resturant Customar may order from-->
+        <td>  
+	      <h3>We are available only at the following regions</h3>
+           <ul style="list-style-type:square"><img src="clickhere.gif" width="150" height="100"></img>
+           <li>Detroit : Taste of India Tandoori</li>
+           <li>Ann Harbor : ZamZam Resturant</li>
+           <li>Farmington : Aladdin Sweets & Cafe</li>
+	       <li>Dearborn : Phulkari Punjabi Kitchen</li>
+         </ul>  
+		</td>
+	  </tr>
+	   
+	   
+	   <!--Attractive Img-->
+	    <tr>
+            <!--Hours of Services-->
+			<td>
+			<center>
+             <img src="Craving.JPG" width="450" height="200" alt="Klematis">
+			 <div>Satisfy any craving with delivery from popular <br> neighborhood restaurants.<br><b>We are available from 10:00am - 10:00 pm (Monday-Sunday)</b></div>
+			</center>
+			</td>
+		     
+			 <!-- Delivery Area-->
+			 <td>
+			 <center>
+			 <img src="delivery.JPG" width="450" height="200" alt="Klematis">    
+			 <div>Get great food delivered or save time and money and preorder for pick up. <br><b> Delivery areas are near Detroit, farmington, Dearborn, Ann Harbor...<br>(at your Home or wherever you want) </b>
+		  </div>
+		  </center>
+        </td>
+	</tr>
+	<hr>
+ <tbody>
+</table> <br><br> 
+
+  <hr>  
+
+<!--footer area -->
+<!--History & Owner-->
+   <div id="footerFlexible">
+  <h4>ABOUT US--
+    <br><i>Door Crash Foodies is satisfying craving Since 2012. You can order anytype of food. Want to be more specific?<br> Search by restaurant name or menu item. We'll filter your results accordingly. When you find what you're looking for, you can place your order online or by phone, free of charge.<br> Oh, and we also give you access to reviews, coupons, special deals and makes sure you get exactly what you want.</i>&nbsp;&nbsp;<br>
+    <a class="emailStyle"; href="mailto:fooddelivery@doorcrashfoodies.com;">E-mail</a>&nbsp;&nbsp;
+    313-717-8034&nbsp;&nbsp;<br>
+    Copyright&nbsp;&copy;&nbsp;2019 Door Crash Foodies All rights reserved.
+  </h4>
+</div>
+<hr>
+</body>
+</html>
